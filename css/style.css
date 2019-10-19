@@ -1,0 +1,216 @@
+* {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 1.5em;
+    font-weight: normal;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.25em;
+    font-weight: normal;
+    text-align: center;
+}
+
+.add,
+.categories,
+.remember,
+.footer {
+    margin-bottom: 2.5em;
+}
+
+.add__form {
+    display: grid;
+    grid-template-columns: repeat(10, 4em);
+    grid-template-rows: repeat(3, 3em);
+    grid-gap: 0.25em;
+    justify-content: center;
+    margin: 0.0625em auto 1em;
+    align-items: flex-end;
+}
+
+.add__form__id {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+.add__form__description {
+    grid-column: 3 / span 8;
+    grid-row: 1;
+}
+
+.add__form__parent-id {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+}
+
+.add__form__category {
+    grid-column: 3 / span 4;
+    grid-row: 2;
+}
+
+.add__form__subcategory {
+    grid-column: 7 / span 4;
+    grid-row: 2;
+}
+
+.add__form__status-priority {
+    grid-column: 3 / span 2;
+    grid-row: 3;
+}
+
+.add__form__favorite {
+    grid-column: 5 / span 2;
+    grid-row: 3;
+    justify-self: center;
+}
+
+.add__form__input__favorite {
+    margin: 0.66em 0.25em;
+}
+
+.add__form__submit {
+    grid-column: 7 / span 2;
+    grid-row: 3;
+}
+
+.add__form label {
+    display: block;
+    font-size: 0.75em;
+    text-indent: 0.5em;
+}
+
+.add__form input,
+.add__form select {
+    box-sizing: border-box;
+    padding: 0.25em;
+    width: 100%;
+}
+
+.add__form__id,
+.add__form__description,
+.add__form__parent-id,
+.add__form__category,
+.add__form__subcategory,
+.add__form__status-priority,
+.add__form__submit {
+    padding: 0.25em;
+}
+
+.categories {
+    margin-bottom: 1.5em;
+}
+
+.categories__list {
+    padding: 0.5em 0 1em;
+    text-align: center;
+}
+
+.categories__list_link {
+    background: rgb(204, 204, 204);
+    border-radius: 0.75em;
+    margin: 0.5em;
+    padding: 0.7em 0.75em 0.8em;
+    text-decoration: none;
+}
+
+.remember__table {
+    background-color: rgb(240, 240, 240);
+}
+
+.remember__table__th,
+.remember__table__tr {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1em 4em 8fr 3fr 3fr 2fr 4fr;
+    grid-gap: 0.25em;
+    margin: 0.0625em;
+}
+
+.remember__table__th {
+    font-weight: bold;
+    text-align: center;
+}
+
+.remember__table__tr {
+    background-color: rgb(253, 253, 253);
+}
+
+.remember__table__tr:nth-child(odd) {
+    background-color: rgb(248, 248, 248);
+}
+
+.remember__table__th__priority,
+.remember__table__th__id,
+.remember__table__th__description,
+.remember__table__th__category,
+.remember__table__th__subcategory,
+.remember__table__th__date,
+.remember__table__th__date__modified,
+.remember__table__th__actions {
+    padding: 0.5em 0;
+}
+
+.remember__table__td__priority {
+    text-align: right;
+}
+
+.remember__table__td__id {
+    text-align: right;
+}
+
+.remember__table__td__description,
+.remember__table__td__category,
+.remember__table__td__subcategory {
+    text-align: left;
+}
+
+.remember__table__td__date,
+.remember__table__td__date__created,
+.remember__table__td__date__modified,
+.remember__table__td__action {
+    text-align: center;
+}
+
+.remember__table__td__priority--x1 { color: rgb(136, 136, 136); } /* completed */
+.remember__table__td__priority--00 { background: rgba(255, 255, 0, 0.2); } /* no-priority */
+.remember__table__td__priority--01 { background: rgba(255, 255, 0, 0.5); }
+.remember__table__td__priority--02 { background: rgba(255, 255, 0, 0.9); }
+.remember__table__td__priority--03 { background: rgb(255, 136, 0); }
+.remember__table__td__priority--04 { background: rgb(255, 0, 0); }
+.remember__table__td__priority--05 { background: rgb(255, 0, 255); }
+
+.footer {
+    margin: 2em;
+}
+
+.footer__copyright,
+.footer__copyright a {
+    font-size: 0.875em;
+    text-align: center;
+}
+
+.visually-hidden {
+    /* Remove the item from normal flow */
+    position: absolute;
+    /* Workaround for falsely pronounced, smushed text */
+    white-space: nowrap;
+    /* Set it to the smallest possible size (some screen readers ignore elements with zero height and width) */
+    width: 1px;
+    height: 1px;
+    /* Hide overflowing content after resizing */
+    overflow: hidden;
+    /* Reset any property that may change the elements size */
+    border: 0;
+    padding: 0;
+    /* Clipping defines what part of an element should be displayed. */
+    /* Deprecated clip property for older browsers */
+    clip: rect(0 0 0 0);
+    /* clip-path for newer browsers. inset(50%) defines an inset rectangle that makes the content disappear.  */
+    clip-path: inset(50%); 
+    /* It seems like at the moment nobody is quite sure why margin: -1px is there. On top of that it seems to cause issues (see: https://github.com/h5bp/html5-boilerplate/issues/1985). */
+    margin: -1px;
+}
