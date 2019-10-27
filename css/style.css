@@ -57,7 +57,7 @@ h2 {
     grid-row: 2;
 }
 
-.add__form__status-priority {
+.add__form__status {
     grid-column: 3 / span 2;
     grid-row: 3;
 }
@@ -95,7 +95,7 @@ h2 {
 .add__form__parent-id,
 .add__form__category,
 .add__form__subcategory,
-.add__form__status-priority,
+.add__form__status,
 .add__form__submit {
     padding: 0.25em;
 }
@@ -143,7 +143,7 @@ h2 {
     background-color: rgb(248, 248, 248);
 }
 
-.remember__table__th__priority,
+.remember__table__th__status,
 .remember__table__th__id,
 .remember__table__th__description,
 .remember__table__th__category,
@@ -154,7 +154,7 @@ h2 {
     padding: 0.5em 0;
 }
 
-.remember__table__td__priority {
+.remember__table__td__status {
     text-align: right;
 }
 
@@ -175,13 +175,13 @@ h2 {
     text-align: center;
 }
 
-.remember__table__td__priority--x1 { color: rgb(136, 136, 136); } /* completed */
-.remember__table__td__priority--00 { background: rgba(255, 255, 0, 0.2); } /* no-priority */
-.remember__table__td__priority--01 { background: rgba(255, 255, 0, 0.5); }
-.remember__table__td__priority--02 { background: rgba(255, 255, 0, 0.9); }
-.remember__table__td__priority--03 { background: rgb(255, 136, 0); }
-.remember__table__td__priority--04 { background: rgb(255, 0, 0); }
-.remember__table__td__priority--05 { background: rgb(255, 0, 255); }
+.remember__table__td__status--x1 { color: rgb(136, 136, 136); } /* completed */
+.remember__table__td__status--00 { background: rgba(255, 255, 0, 0.2); } /* no-status */
+.remember__table__td__status--01 { background: rgba(255, 255, 0, 0.5); }
+.remember__table__td__status--02 { background: rgba(255, 255, 0, 0.9); }
+.remember__table__td__status--03 { background: rgb(255, 136, 0); }
+.remember__table__td__status--04 { background: rgb(255, 0, 0); }
+.remember__table__td__status--05 { background: rgb(255, 0, 255); }
 
 .remember__table__td__actions__dialog-box .disable-screen {
     background-color: rgba(0, 0, 0 , 0.6);
