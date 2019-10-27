@@ -28,48 +28,75 @@
                     <label for="description">
                         Name/Description
                     </label>
+                    <span class="add__form__description__error" id="description-error">Name/Description is required.</span>
                     <input
                       class="add__form__input__description"
                       id="description"
                       name="description"
                       type="text"
                       value="Enter a description or name"
-                      onkeypress="alert('test');" />
+                      onkeyup="validateDescription();"
+                      onblur="resetDefaultDescription();"
+                      onfocus="clearDefaultDescription();"
+                    />
                 </div>
 
                 <div class="add__form__parent-id">
                     <label for="parent-id">
                         Parent ID (optional)
                     </label>
-                    <input class="add__form__input__parent-id" id="parent-id" name="parentID" type="text" value="" />
+                    <span class="add__form__parent-id__error" id="parent-id-error"></span>
+                    <input
+                      class="add__form__input__parent-id"
+                      id="parent-id"
+                      name="parentID"
+                      type="text"
+                      value=""
+                      onkeyup="validateParentID();"
+                    />
                 </div>
                 
                 <div class="add__form__category">
                     <label for="category">
-                        Category
+                        Category (optional)
                     </label>
-                    <input class="add__form__input__category" id="category" name="category" type="text" value="" />
+                    <span class="add__form__category__error" id="category-error"></span>
+                    <input
+                      class="add__form__input__category"
+                      id="category"
+                      name="category" 
+                      type="text"
+                      value=""
+                      onkeyup="validateCategory();" />
                 </div>
                 
                 <div class="add__form__subcategory">
                     <label for="subcategory">
-                        Subcategory
+                        Subcategory (optional)
                     </label>
-                    <input class="add__form__input__subcategory" id="subcategory" name="subCategory" type="text" value="" />
+                    <span class="add__form__subcategory__error" id="subcategory-error"></span>
+                    <input
+                      class="add__form__input__subcategory"
+                      id="subcategory"
+                      name="subCategory" 
+                      type="text"
+                      value=""
+                      onkeyup="validateSubcategory();" />
                 </div>
                 
                 <div class="add__form__status-priority">
                     <label for="status-priority">
                         Status/Priority
                     </label>
+                    <span class="add__form__status-priority__error" id="status-priority-error"></span>
                     <select class="add__form__input__status-priority" id="status-priority" name="statusPriority">
                         <option value="0">Completed</option>
-                        <option value="0">No Priority</option>
-                        <option value="1">1 (lowest)</option>
+                        <option value="0" selected>No Priority</option>
+                        <option value="1">1 (low)</option>
                         <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="3">3 (medium)</option>
                         <option value="4">4</option>
-                        <option value="5">5 (highest)</option>
+                        <option value="5">5 (high)</option>
                     </select>
                 </div>
                 
@@ -77,11 +104,21 @@
                     <label for="favorite">
                         Favorite
                     </label>
-                    <input class="add__form__input__favorite" id="favorite" name="favorite" type="checkbox" />
+                    <span class="add__form__favorite__error" id="favorite-error"></span>
+                    <input
+                      class="add__form__input__favorite"
+                      id="favorite"
+                      name="favorite"
+                      type="checkbox"
+                      onchange="validateFavorite();" />
                 </div>
 
                 <div class="add__form__submit">
-                    <input class="add__form__input__submit" type="submit" value="Add" />
+                    <input
+                      class="add__form__input__submit"
+                      type="button"
+                      value="Add"
+                      onclick="rememberRemember();" />
                 </div>
             </form>
         </section>
@@ -98,7 +135,7 @@
             <h2>Things to not be forgot</h2>
 
             <div class="remember__table">
-                <div class="remember__table__th">
+                <div class="remember__table__th" id="table-header">
                     <div class="remember__table__th__priority">!</div>
                     <div class="remember__table__th__id">ID</div>
                     <div class="remember__table__th__description">Description</div>
@@ -111,50 +148,14 @@
                     <div class="remember__table__th__actions">Actions</div>
                 </div>            
     
-                <div class="remember__table__tr" id="0">
-                    <div class="remember__table__td__priority"><div class=""></div></div>
-                    <div class="remember__table__td__id">{ ID }</div>
-                    <div class="remember__table__td__description">{ Description }</div>
-                    <div class="remember__table__td__category">{ Category }</div>
-                    <div class="remember__table__td__subcategory">{ Subcategory }</div>
-                    <div class="remember__table__td__date">
-                        <div class="remember__table__td__date__created">{ Created }</div>
-                        <div class="remember__table__td__date__modified">{ Modified }</div>
-                    </div>
-                    <div class="remember__table__td__actions">
-                        <span>{ Status }</span>
-        
-                        <label for="favorite-{id}">
-                                Favorite
-                        </label>
-                        <input id="favorite-{id}" name="favorite" type="checkbox" />
-                    </div>
-                </div>
-    
-                <div class="remember__table__tr" id="1">
-                    <div class="remember__table__td__priority"></div>
-                    <div class="remember__table__td__id">{ ID }</div>
-                    <div class="remember__table__td__description">{ Description }</div>
-                    <div class="remember__table__td__category">{ Category }</div>
-                    <div class="remember__table__td__subcategory">{ Subcategory }</div>
-                    <div class="remember__table__td__date">
-                        <div class="remember__table__td__date__created">{ Created }</div>
-                        <div class="remember__table__td__date__modified">{ Modified }</div>
-                    </div>
-                    <div class="remember__table__td__actions">
-                        <span>{ Status }</span>
-        
-                        <label for="favorite-{id}">
-                                Favorite
-                        </label>
-                        <input id="favorite-{id}" name="favorite" type="checkbox" />
-                    </div>
-                </div>
+
             </div>
         </section>
 
         <footer class="footer">
             <div class="footer__copyright"><a href="#">Remember, remember</a> is create and released under the <a href="#">GPL licensing</a> by <a href="#">Tyler Robots</a>.</div>
         </footer>
+
+        <script src="js/main.js"></script>
     </body>
 </html>
