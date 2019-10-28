@@ -68,8 +68,34 @@ h2 {
     justify-self: center;
 }
 
+.add__form .add__form__favorite label {
+    text-indent: 0;
+}
+
 .add__form__input__favorite {
     margin: 0.66em 0.25em;
+}
+
+.add__form__input__favorite[type="checkbox"], 
+.remember__table__td__actions__input__favorite[type="checkbox"] {
+    display: none;
+}
+
+.add__form__input__favorite[type="checkbox"] + span, 
+.remember__table__td__actions__input__favorite[type="checkbox"] + span {
+    background-image: url(../img/checkbox-star.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 2em;
+    width: 2em;
+    margin: auto;
+    vertical-align: middle;
+}
+
+.add__form__input__favorite[type="checkbox"]:checked + span, 
+.remember__table__td__actions__input__favorite[type="checkbox"]:checked + span{
+    background-position-x: -2em;
 }
 
 .add__form__submit {
@@ -204,6 +230,7 @@ h2 {
     z-index: 50;
 }
 
+remember__table_td__actions__input__status
 .footer {
     margin: 2em;
 }

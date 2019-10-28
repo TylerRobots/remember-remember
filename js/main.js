@@ -269,36 +269,36 @@ function createTableRow( thing ) {
         <div class="remember__table__td__actions">
             <span>
                 <select
-                  class="remember__table_td__actions__input__status"
+                  class="remember__table__td__actions__input__status"
                   id="status-${thing.id}"
                   name="status"
                   onChange="updateRememberedThing('${thing.id}');" >
                 
-                    <option value="-3" disabled ${selectStatus(thing.status, -3 )}>
+                    <option value="-3" disabled ${preSelect(thing.status, -3 )}>
                         Removed
                     </option>
-                    <option value="-2" disabled ${selectStatus(thing.status, -2 )}>
+                    <option value="-2" disabled ${preSelect(thing.status, -2 )}>
                         Archived
                     </option>
-                    <option value="-1" ${selectStatus(thing.status, -1 )}>
+                    <option value="-1" ${preSelect(thing.status, -1 )}>
                         Completed
                     </option>
-                    <option value="0" ${selectStatus(thing.status, 0 )}>
+                    <option value="0" ${preSelect(thing.status, 0 )}>
                         No Priority
                     </option>
-                    <option value="1" ${selectStatus(thing.status, 1 )}>
+                    <option value="1" ${preSelect(thing.status, 1 )}>
                         1 (low)
                     </option>
-                    <option value="2" ${selectStatus(thing.status, 2 )}>
+                    <option value="2" ${preSelect(thing.status, 2 )}>
                         2
                     </option>
-                    <option value="3" ${selectStatus(thing.status, 3 )}>
+                    <option value="3" ${preSelect(thing.status, 3 )}>
                         3 (medium)
                     </option>
-                    <option value="4" ${selectStatus(thing.status, 4 )}>
+                    <option value="4" ${preSelect(thing.status, 4 )}>
                         4
                     </option>
-                    <option value="5" ${selectStatus(thing.status, 5 )}>
+                    <option value="5" ${preSelect(thing.status, 5 )}>
                         5 (high)
                     </option>
             
@@ -308,8 +308,15 @@ function createTableRow( thing ) {
             <span>
                 <label for="favorite-${thing.id}">
                     Favorite
+
+                    <input
+                      class="remember__table__td__actions__input__favorite"
+                      id="favorite-${thing.id}"
+                      name="favorite"
+                      type="checkbox"
+                      ${preCheck(thing.favorite)} />
+                    <span class="checkbox"></span>
                 </label>
-                <input id="favorite-${thing.id}" name="favorite" type="checkbox" />
             </span>
             
             <span>
@@ -347,14 +354,20 @@ function createTableRow( thing ) {
 }
 
 
+function preCheck( option ) {
+
+    return option == true ? "checked" : "";
+
+}
+
 /**
  * 
- * @param {*} statusNumber 
- * @param {*} statusToMatch 
+ * @param {*} option 
+ * @param {*} toMatch 
  */
-function selectStatus( statusNumber, statusToMatch ) {
+function preSelect( option, toMatch ) {
 
-    return statusNumber == statusToMatch ? "selected" : "";
+    return option == toMatch ? "selected" : "";
 
 }
 

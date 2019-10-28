@@ -103,14 +103,16 @@
                 <div class="add__form__favorite">
                     <label for="favorite">
                         Favorite
+                    
+                        <span class="add__form__favorite__error" id="favorite-error"></span>
+                        <input
+                          class="add__form__input__favorite"
+                          id="favorite"
+                          name="favorite"
+                          type="checkbox"
+                          onchange="validateFavorite();" />
+                        <span class="checkbox"></span>
                     </label>
-                    <span class="add__form__favorite__error" id="favorite-error"></span>
-                    <input
-                      class="add__form__input__favorite"
-                      id="favorite"
-                      name="favorite"
-                      type="checkbox"
-                      onchange="validateFavorite();" />
                 </div>
 
                 <div class="add__form__submit">
