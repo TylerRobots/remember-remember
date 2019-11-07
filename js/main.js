@@ -847,11 +847,16 @@ function validateCategory() {
     function checkCategoryRules( value ) {
         let errors = [];
         
-        if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
-            errors[0] = `The Category can only contain alphanumeric characters, dashes, spaces, and underscores.`;
-        }
+        if( value != "" ) {
 
+            if( value.search( /^[ a-zA-Z0-9!._-]+$/ )  ) {
+                errors[0] = `The Category can only contain alphanumeric characters, dashes, spaces, and underscores.`;
+            }
+                
+        }
+        
         return errors;
+
     }
 
     return validateInput( "category", checkCategoryRules );
@@ -866,11 +871,16 @@ function validateSubcategory() {
     function checkSubcategoryRules( value ) {
         let errors = [];
         
-        if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
-            errors[0] = `The Subcategory can only contain alphanumeric characters, dashes, spaces, and underscores.`;
-        }
+        if( value != "" ) {
 
+            if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
+                errors[0] = `The Subcategory can only contain alphanumeric characters, dashes, spaces, and underscores.`;
+            }
+            
+        }
+        
         return errors;
+
     }
 
     return validateInput( "subcategory", checkSubcategoryRules );
