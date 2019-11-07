@@ -1,0 +1,54 @@
+{
+	"en": {
+		"header-main"               : "Remember, remember, things I want to remember",
+		"header-1"                  : "Add items, stories and thoughts",
+		"header-2"                  : "Pick a category, filter the query",
+		"header-3"                  : "Things to not be forgot",
+
+		"form-label-id"             : "ID",
+		"form-label-name"           : "Name/Description",
+		"form-label-parent-id"      : "Parent ID (optional)",
+		"form-label-category"       : "Category (optional)",
+		"form-label-subcategory"    : "Subcategory (optional)",
+		"form-label-status"         : "Status/Priority",
+		"form-label-favorite"       : "Favorite",
+
+		"default-value-description" : "Enter a description or name",
+		"default-value-parent-id"   : "",
+		"default-value-category"    : "",
+		"default-value-subcategory" : "",
+		"default-value-status"      : "0",
+		"default-value-favorite"    : false,
+		"default-value-add"         : "Add",
+		"default-value-delete"      : "Delete",
+		"delete-confirm"            : "Please confirm.",
+		"default-value-delete-confirm": "Delete",
+
+		"status-n-3"                : "-3",
+		"status-n-2"                : "-2",
+		"status-n-1"                : "-1",
+		"status-n01"                : "1",
+		"status-n02"                : "2",
+		"status-n03"                : "3",
+		"status-n04"                : "4",
+		"status-n05"                : "5",
+
+		"status-w-2"                : "Archived",
+		"status-w-3"                : "Removed",
+		"status-w-1"                : "Completed",
+		"status-w00"                : "No Priority",
+		"status-w01"                : "Low",
+		"status-w02"                : "Low-medium",
+		"status-w03"                : "Medium",
+		"status-w04"                : "Medium-high",
+		"status-w05"                : "High",
+
+		"th-id"                     : "ID",
+		"th-name"                   : "Name/Description",
+		"th-parent-id"              : "",
+		"th-category"               : "Category",
+		"th-subcategory"            : "Subcategory",
+		"th-status"                 : "!",
+		"th-favorite"               : "Favorite"
+	}
+}
