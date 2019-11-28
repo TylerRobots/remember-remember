@@ -1,10 +1,36 @@
-* {
+/**
+ * ## Contents
+ * ===
+ * Reset
+ * Common
+ * - Sections
+ * - Accessibility
+ * - Forms
+ * - - Form Errors
+ * - Filters
+ * - Table
+ * - - Table Forms
+ * - - - Table Form Errors
+ * Mobile
+ * Tablet
+ * Desktop
+ */
+
+/**
+ * ## Reset
+ */
+
+/**
+ * ## Common
+ */
+
+ * {
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 1.75em;
     font-weight: normal;
     text-align: center;
 }
@@ -15,232 +41,7 @@ h2 {
     text-align: center;
 }
 
-.add,
-.categories,
-.remember,
-.footer {
-    margin-bottom: 2.5em;
-}
-
-.add__form {
-    display: grid;
-    grid-template-columns: repeat(10, 4em);
-    grid-template-rows: repeat(3, 3em);
-    grid-gap: 0.25em;
-    justify-content: center;
-    margin: 0.0625em auto 1em;
-    align-items: flex-end;
-}
-
-.add__form__id {
-    grid-column: 1 / span 2;
-    grid-row: 1;
-}
-
-.add__form__description {
-    grid-column: 3 / span 8;
-    grid-row: 1;
-}
-
-.add__form__parent-id {
-    grid-column: 1 / span 2;
-    grid-row: 2;
-}
-
-.add__form__category {
-    grid-column: 3 / span 4;
-    grid-row: 2;
-}
-
-.add__form__subcategory {
-    grid-column: 7 / span 4;
-    grid-row: 2;
-}
-
-.add__form__status {
-    grid-column: 3 / span 2;
-    grid-row: 3;
-}
-
-.add__form__favorite {
-    grid-column: 5 / span 2;
-    grid-row: 3;
-    justify-self: center;
-}
-
-.add__form .add__form__favorite label {
-    text-indent: 0;
-}
-
-.add__form__input__favorite {
-    margin: 0.66em 0.25em;
-}
-
-.add__form__input__favorite[type="checkbox"], 
-.remember__table__td__actions__input__favorite[type="checkbox"] {
-    display: none;
-}
-
-.add__form__input__favorite[type="checkbox"] + span, 
-.remember__table__td__actions__input__favorite[type="checkbox"] + span {
-    background-image: url(../img/checkbox-star.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: block;
-    height: 2em;
-    width: 2em;
-    margin: auto;
-    vertical-align: middle;
-}
-
-.add__form__input__favorite[type="checkbox"]:checked + span, 
-.remember__table__td__actions__input__favorite[type="checkbox"]:checked + span{
-    background-position-x: -2em;
-}
-
-.add__form__submit {
-    grid-column: 7 / span 2;
-    grid-row: 3;
-}
-
-.add__form label {
-    display: block;
-    font-size: 0.75em;
-    text-indent: 0.5em;
-}
-
-.add__form input,
-.add__form select {
-    box-sizing: border-box;
-    padding: 0.25em;
-    width: 100%;
-}
-
-.add__form__id,
-.add__form__description,
-.add__form__parent-id,
-.add__form__category,
-.add__form__subcategory,
-.add__form__status,
-.add__form__submit {
-    padding: 0.25em;
-}
-
-.categories {
-    margin-bottom: 1.5em;
-}
-
-.categories__list {
-    padding: 0.5em 0 1em;
-    text-align: center;
-}
-
-.categories__list_link {
-    background: rgb(204, 204, 204);
-    border-radius: 0.75em;
-    margin: 0.5em;
-    padding: 0.7em 0.75em 0.8em;
-    text-decoration: none;
-}
-
-.remember__table {
-    background-color: rgb(240, 240, 240);
-}
-
-.remember__table__th,
-.remember__table__tr {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1em 4em 8fr 3fr 3fr 2fr 4fr;
-    grid-gap: 0.25em;
-    margin: 0.0625em;
-}
-
-.remember__table__th {
-    font-weight: bold;
-    text-align: center;
-}
-
-.remember__table__tr {
-    background-color: rgb(253, 253, 253);
-}
-
-.remember__table__tr:nth-child(odd) {
-    background-color: rgb(248, 248, 248);
-}
-
-.remember__table__th__status,
-.remember__table__th__id,
-.remember__table__th__description,
-.remember__table__th__category,
-.remember__table__th__subcategory,
-.remember__table__th__date,
-.remember__table__th__date__modified,
-.remember__table__th__actions {
-    padding: 0.5em 0;
-}
-
-.remember__table__td__status {
-    text-align: right;
-}
-
-.remember__table__td__id {
-    text-align: right;
-}
-
-.remember__table__td__description,
-.remember__table__td__category,
-.remember__table__td__subcategory {
-    text-align: left;
-}
-
-.remember__table__td__date,
-.remember__table__td__date__created,
-.remember__table__td__date__modified,
-.remember__table__td__action {
-    text-align: center;
-}
-
-.remember__table__td__status--x1 { color: rgb(136, 136, 136); } /* completed */
-.remember__table__td__status--00 { background: rgba(255, 255, 0, 0.2); } /* no-status */
-.remember__table__td__status--01 { background: rgba(255, 255, 0, 0.5); }
-.remember__table__td__status--02 { background: rgba(255, 255, 0, 0.9); }
-.remember__table__td__status--03 { background: rgb(255, 136, 0); }
-.remember__table__td__status--04 { background: rgb(255, 0, 0); }
-.remember__table__td__status--05 { background: rgb(255, 0, 255); }
-
-.remember__table__td__actions__dialog-box .disable-screen {
-    background-color: rgba(0, 0, 0 , 0.6);
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
-
-.remember__table__td__actions__dialog-box .dialog {
-    background: rgb(255, 255, 255);
-    box-shadow: 0 0.0625em .5em 0.0625em rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    margin: -100%;
-    padding: 1em;
-    position: relative;
-    text-align: center;
-    z-index: 50;
-}
-
-remember__table_td__actions__input__status
-.footer {
-    margin: 2em;
-}
-
-.footer__copyright,
-.footer__copyright a {
-    font-size: 0.875em;
-    text-align: center;
-}
-
+/** ### Visually hidden, still readable for accessibility */
 .visually-hidden {
     /* Remove the item from normal flow */
     position: absolute;
@@ -263,7 +64,601 @@ remember__table_td__actions__input__status
     margin: -1px;
 }
 
+span[aria-hidden="true"],
 .hidden {
     display: none;
     visibility: hidden;
+}
+
+/** ### Forms */
+
+.add__form {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(3, 4.75em);
+    grid-gap: 0.25em;
+    justify-content: center;
+    margin: 0.0625em auto 1em;
+    align-items: flex-end;
+}
+
+.add__id {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+.add__description {
+    grid-column: 3 / span 8;
+    grid-row: 1;
+}
+
+.add__parent-id {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+}
+
+.add__category {
+    grid-column: 3 / span 4;
+    grid-row: 2;
+}
+
+.add__subcategory {
+    grid-column: 7 / span 4;
+    grid-row: 2;
+}
+
+.add__status {
+    grid-column: 2 / span 3;
+    grid-row: 3;
+}
+
+.add__favorite {
+    grid-column: 5 / span 2;
+    grid-row: 3;
+    align-self: normal;
+    justify-self: center;
+}
+
+.add__favorite .add__label {
+    text-indent: 0;
+    margin-top: 0.4375em;
+}
+
+.add__favorite .add__input {
+    margin: 0.66em 0.25em;
+}
+
+/** Change checkbox image */
+.add__favorite .add__input, 
+.data-entry_field_favorite input {
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%); 
+    margin: -1px;
+}
+.add__favorite .add__input + span, 
+.data-entry_field_favorite input + span {
+    background-image: url(../img/checkbox-star.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 2em;
+    width: 2em;
+    margin: 0.7em auto;
+}
+.add__favorite .add__input:checked + span, 
+.data-entry_field_favorite input:checked + span {
+    background-position-x: -2em;
+}
+
+.add__submit {
+    grid-column: 7 / span 3;
+    grid-row: 3;
+    text-align: center;
+}
+
+.add__submit .add__input {
+    background: rgb(125,175,255);
+    max-width: 5em;
+}
+
+.data-entry__label,
+.add__label {
+    display: block;
+    font-size: 0.75em;
+    text-indent: 0.5em;
+}
+
+.add__label_id,
+.add__label_parent-id
+.add__label_description,
+.add__label_category,
+.add__label_subcategory,
+.add__label_status,
+.add__label_favorite {
+    
+}
+
+.add__input,
+.add__form select,
+.data-entry__input {
+    border: solid 0.0625em rgb(128,128,128);
+    border-radius: 0.25em;
+    box-sizing: border-box;
+    padding: 1em 0.5em;
+    width: 100%;
+}
+
+.data-entry__input {
+    background: transparent;
+    border: none;
+}
+.data-entry__input:hover {
+    background: rgb(255,255,255);
+    border: solid 0.0625em rgb(223,223,223);
+}
+.data-entry__input:focus {
+    border: solid 0.0625em rgb(128,128,128);
+    background: rgb(255,255,255);
+}
+
+.unsaved {
+    background: rgb(255,255,255);
+}
+
+.remember__th,
+.thing {
+    padding: 0 0.25em 0.25em;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.actions .data-entry__input,
+.actions .data-entry__input:hover {
+    border: solid 0.0625em rgb(128,128,128);
+    background: rgb(255,255,255);
+}
+
+.actions .btn_delete,
+.actions .btn_confirm-delete {
+    background:  rgb(255,162,162);
+    border: solid 0.0625em rgb(128,128,128);
+}
+
+.actions .btn_delete:hover,
+.actions .btn_confirm-delete:hover,
+.actions .btn_delete:active,
+.actions .btn_confirm-delete:active,
+.actions .btn_delete:focus,
+.actions .btn_confirm-delete:focus {
+    background:  rgb(255,96,96);
+}
+
+.add__id,
+.add__description,
+.add__parent-id,
+.add__category,
+.add__subcategory,
+.add__status,
+.add__submit {
+    padding: 0.25em;
+}
+
+/** #### Form Errors */
+
+.add__label span,
+.data-entry__label span {
+    display: block;
+}
+
+.data-entry_error .add__error-msg,
+.data-entry_error .data-entry__error-msg {
+    display: initial;
+}
+
+.add__error-msg input,
+.data-entry_error input {
+    border: solid 0.125em rgb(204, 0, 0);
+}
+
+.add__error-msg,
+.data-entry__error-msg {
+    background-color: rgb(255, 255, 255);
+    border-right: solid 0.125em rgb(204, 0, 0);
+    border-bottom: solid 0.125em rgb(204,0,0);
+    border-left: solid 0.125em rgb(204,0,0);
+    display: none;
+    position: absolute;
+    margin: 3em 1em;
+    max-width: 20em;
+    z-index: 25;
+}
+
+.add__error-msg ul,
+.data-entry__error-msg ul {
+    margin-block-start: 0.25em;
+    padding-inline-start: 1.5em;
+    padding-inline-end: 1em;
+}
+
+/** ### Filters */
+.categories {
+    padding-bottom: 1.5em;
+}
+
+.categories__list {
+    padding: 0.5em 0 1em;
+    text-align: center;
+}
+
+.categories__link {
+    background: rgb(225, 225, 225);
+    border-radius: 0.75em;
+    margin: 0.5em;
+    padding: 1em 1.1em 1.2em;
+    text-decoration: none;
+}
+
+
+/** ### Table */
+
+.remember__table {
+    background-color: rgb(240, 240, 240);
+    padding-bottom: 0.25em;
+}
+
+.thing label span {
+    color: rgb(160,160,160);
+}
+
+.remember__th,
+.thing {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(20, 1fr);
+    grid-gap: 0.25em;
+    margin: 0.0625em;
+}
+
+.remember__th {
+    font-weight: bold;
+    text-align: center;
+}
+
+.thing {
+    background-color: rgb(253, 253, 253);
+    height: 4em;
+}
+
+.thing:nth-child(odd) {
+    background-color: rgb(248, 248, 248);
+}
+
+.remember__td_status,
+.remember__td_id,
+.remember__td_description,
+.remember__td_category,
+.remember__td_subcategory,
+.remember__td_date,
+.remember__td_actions {
+    padding: 0.5em 0;
+}
+
+.remember__date-created,
+.remember__date-modified {
+    padding: 0.5em 0;
+}
+
+.data_field_status {
+    text-align: right;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+.data__flag {
+    width: 100%;
+    height: 100%;
+}
+
+.data_field_id {
+    text-align: center;
+}
+
+.data-entry_field_description,
+.data-entry_field_category,
+.data-entry_field_subcategory {
+    text-align: left;
+}
+
+.data_field_date,
+.data_field_date-created,
+.data_field_date-modified {
+    text-align: center;
+}
+
+.data_field_date-modified {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0.0625em .5em 0.0625em rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    padding: 0.5em;
+    position: relative;
+}
+
+.data-entry__input_status_-3 { color: rgb(136, 136, 136); } /* removed */
+.data-entry__input_status_-2 { color: rgb(136, 136, 136); } /* archived */
+.data-entry__input_status_-1 { color: rgb(136, 136, 136); } /* completed */
+.data-entry__input_status_0 { background: rgba(255, 255, 0, 0.05); } /* no-status */
+.data-entry__input_status_1 { background: rgba(255, 255, 0, 0.125); }
+.data-entry__input_status_2 { background: rgba(255, 255, 0, 0.2125); }
+.data-entry__input_status_3 { background: rgba(255, 136, 0, 0.2125); }
+.data-entry__input_status_4 { background: rgba(255, 0, 0, 0.2125); }
+.data-entry__input_status_5 { background: rgba(255, 0, 255, 0.2125); }
+
+.data-entry_field_favorite {
+    text-align: center;
+}
+
+.dialog-box__disable-screen {
+    background-color: rgba(0, 0, 0 , 0.6);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.dialog-box__dialog {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 0.0625em .5em 0.0625em rgba(0, 0, 0, 0.2);
+    border-radius: 0.125em;
+    display: inline-block;
+    /* center element - https://stackoverflow.com/a/32694476 */
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    padding: 1em;
+    position: fixed;
+    text-align: center;
+    z-index: 101;
+}
+
+/** Footer */
+.footer {
+    background: rgb(200,200,200);
+    padding: 2em;
+}
+
+.footer__copyright,
+.footer__copyright a {
+    font-size: 0.875em;
+    text-align: center;
+}
+
+/**
+ * Mobile
+ */
+@media only screen and (max-width: 767px) {
+
+    /** ### Table */
+
+    .thing {
+        grid-template-rows: 4.25em 1.75em 4.25em 4.25em;
+        overflow: hidden;
+    }
+
+    .thing:focus-within {
+        height: auto;
+    }
+
+    .remember__td_status,
+    .remember__td_date,
+    .remember__td_category,
+    .remember__td_subcategory,
+    .remember__td_actions {
+        display: none;
+    }
+
+
+    .data_field_status {
+        grid-column: 1 / span 2;
+        grid-row: 1;
+    }
+    
+    .remember__td_id,
+    .data_field_id {
+        grid-column: 3 / span 2;
+        grid-row: 1;
+    }
+    
+    .remember__td_description,
+    .data-entry_field_description {
+        grid-column: 5 / -1;
+        grid-row: 1;
+    }
+
+    .data-entry_field_category {
+        grid-column: 1 / span 10;
+        grid-row: 3;
+    }
+    .data-entry_field_subcategory {
+        grid-column: 11 / span 10;
+        grid-row: 3;
+        color: rgb(127,127,127);
+    }
+    
+    .data_field_date {
+        grid-column: 1 / span 16;
+        grid-row: 2;
+        justify-self: left;
+    }
+
+    .actions {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column: 1 / -1;
+        grid-row: 4;
+    }
+    
+}
+
+/**
+ * Tablet
+ */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    
+    /** Common */
+    
+    /** ### Forms */
+
+    .add__status {
+        grid-column: 3 / span 2;
+        grid-row: 3;
+    }
+    
+    .add__submit {
+        grid-column: 7 / span 2;
+        grid-row: 3;
+    }
+
+    /** ### Table */
+
+    .thing {
+        grid-template-rows: 4.25em 1.75em 4.25em;
+        height: 4em;
+        overflow: hidden;
+    }
+
+    .thing:focus-within {
+        height: auto;
+    }
+    
+    .remember__td_category,
+    .remember__td_date,
+    .remember__td_subcategory {
+        display: none;
+    }
+    
+    .remember__td_status,
+    .data_field_status,
+    .remember__td_id,
+    .data_field_id,
+    .remember__td_description,
+    .data-entry_field_description,
+    .remember__td_category,
+    .data-entry_field_category,
+    .remember__td_subcategory,
+    .data-entry_field_subcategory,
+    .remember__td_date,
+    .data_field_date,
+    .remember__td_actions,
+    .data-entry_field_actions {
+        grid-row: 1;
+    }
+
+    .remember__td_status,
+    .data_field_status {
+        grid-column: 1 / span 1;
+    }
+    .remember__td_id,
+    .data_field_id {
+        grid-column: 2 / span 1;
+    }
+    .remember__td_description,
+    .data-entry_field_description {
+        grid-column: 3 / span 12;
+    }
+    .data-entry_field_category {
+        grid-column: 2 / span 6;
+        grid-row: 3;
+    }
+    .data-entry_field_subcategory {
+        grid-column: 8 / span 6;
+        grid-row: 3;
+    }
+    .data_field_date {
+        grid-column: 2 / span 4;
+        grid-row: 2;
+    }
+    .remember__td_actions,
+    .actions {
+        grid-column: 15 / -1;
+    }
+
+}
+
+/**
+ * Desktop
+ */
+@media only screen and (min-width: 1024px) {
+
+    /** Forms */
+
+    .add__form {
+        max-width: 50em;
+    }
+
+    /** ### Table */
+
+    .thing {
+        grid-template-rows: 4.5em;
+        height: 4.25em;
+    }
+
+    .remember__td_status,
+    .data_field_status,
+    .remember__td_id,
+    .data_field_id,
+    .remember__td_description,
+    .data-entry_field_description,
+    .remember__td_category,
+    .data-entry_field_category,
+    .remember__td_subcategory,
+    .data-entry_field_subcategory,
+    .remember__td_date,
+    .data_field_date,
+    .remember__td_actions,
+    .data-entry_field_actions {
+        grid-row: 1;
+    }
+    .remember__td_status,
+    .data-entry_field_status {
+        grid-column: 1 / span 1;
+    }
+    .remember__td_id,
+    .data-entry_field_id {
+        grid-column: 2 / span 1;
+    }
+    .remember__td_description,
+    .data-entry_field_description {
+        grid-column: 3 / span 8;
+    }
+    .remember__td_category,
+    .data-entry_field_category {
+        grid-column: 11 / span 2;
+    }
+    .remember__td_subcategory,
+    .data-entry_field_subcategory {
+        grid-column: 13 / span 2;
+    }
+    .remember__td_date,
+    .data_field_date {
+        grid-column: 15 / span 2;
+    }
+    .remember__td_actions,
+    .actions {
+        grid-column: 17 / span 4;
+    }
+
 }

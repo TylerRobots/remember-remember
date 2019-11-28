@@ -42,6 +42,7 @@ updateFavorite()
  * * clearDefaultDescription()
  * * resetDefaultDescription()
  flagToSave()
+ * * statusClassName( status )
  * Error Service
  * * clearErrors( elementID )
  * * handleErrors( elementID, errors )
@@ -83,7 +84,7 @@ function datetimeString( time="now" ) {
     let date = new Date;
     
     year = String( date.getFullYear() );
-    month = String( date.getMonth() ).padStart( 2, 0 );
+    month = String( date.getMonth() + 1 ).padStart( 2, 0 );
     day = String( date.getDate() ).padStart( 2, 0 );
     hour = String( date.getHours() ).padStart( 2, 0 );
     minute = String( date.getMinutes() ).padStart( 2, 0 );
@@ -112,14 +113,36 @@ function objectLength( object ) {
     
 }
 
+
+/**
+ * 
+ * @param {*} elementID 
+ * @param {*} className 
+ */
+function toggleClass( elementID, className ) {
+
+    document.getElementById( elementID ).classList.toggle( className );
+
+}
+
 /**
  * 
  * @param {*} elementID Select an element by ID
  */
 function togglePopup( elementID ) {
-    
-    document.getElementById( elementID ).classList.toggle( "hidden" );
-    
+
+    toggleClass( elementID, "hidden" );
+
+}
+
+/**
+ * 
+ * @param {*} elementID 
+ */
+function toggleTableRow( elementID ) {
+
+    toggleClass( elementID, "show-details" );
+
 }
 
 /**
@@ -443,16 +466,21 @@ function testRemoteConnection() {
  */
 
 /**
- * default, id, name, category, subcategory, [ datetimeStart, datetimeStop], status
+ * 
+ * @param {*} things 
+ * @param {*} prop 
+ * @param {*} value
+ * 
+ * source: https://stackoverflow.com/a/5072145
  */
 function filter( things, prop, value ) {
     
     let filteredThings = {};
-
+    
     for( thing in things) {
-
+        
         if( things[thing][prop] != value ) {
-
+            
             filteredThings[thing] = things[thing];
             
         }
@@ -475,6 +503,7 @@ function filterRemoved( things ) {
 
 /**
  * name, category, subcategory, dateCreated, dateModified, status
+ * default, id, name, category, subcategory, [ datetimeStart, datetimeStop], status
  */
 function sort() {
 
@@ -495,7 +524,7 @@ function sort() {
  */
 function  removeAllTableRows() {
 
-    let elementClassName = "remember__table__tr";
+    let elementClassName = "thing";
     let tableRows = document.getElementsByClassName( elementClassName )[0];
 
     if( node.length > 0) {
@@ -518,76 +547,128 @@ function createTableRow( thing ) {
     let elementID = "table-header";
     
     let node = document.createElement( "div" );
-    node.setAttribute( "class", "remember__table__tr remember__table__tr--status__" + thing.status );
+    node.setAttribute( "class", "thing thing_status_" + thing.status );
     node.setAttribute( "id", "item-" + thing.id );
+    node.setAttribute( "tabindex", "-1" );
     let nodePosition = document.getElementById( elementID ).parentElement;
     nodePosition.insertBefore(node, nodePosition[1]);
                 
     let tableRow = `
-        <div class="remember__table__td__status">
-            ${thing.status}
+        <div class="data data_field_status">
+            <span class="data__label visually-hidden">Priority</span>
+            <div class="data__flag ${statusForClassName(thing.status)}">${thing.status}</div>
         </div>
-        <div class="remember__table__td__id">
-            ${thing.id}
+        <div class="data-entry data-entry_field_description">
+            <label for="description-${thing.id}">
+                <span class="data-entry__label">Description </span>
+                <span class="data-entry__error-msg" id="description-${thing.id}-error"></span>
+            </label>
+            <input
+              class="data-entry__input"
+              id="description-${thing.id}"
+              name="description"
+              type="text"
+              value="${thing.description}"
+              onkeyup="validateDescription(${thing.id});"
+              onblur=""
+            />
         </div>
-        <div class="remember__table__td__description">
-            ${thing.description}
+        <div class="data data_field_id">
+            <span class="data__label visually-hidden">ID Number </span>
+            <span>${thing.id}</span>
         </div>
-        <div class="remember__table__td__category">
-            ${thing.category}
+        <div class="data-entry data-entry_field_category">
+            <label for="category-${thing.id}">
+                <span class="data-entry__label">Category </span>
+                <span class="data-entry__error-msg" id="category-${thing.id}-error"></span>
+            </label>
+            <input
+              class="data-entry__input"
+              id="category-${thing.id}"
+              name="category"
+              type="text"
+              value="${thing.category}"
+              onkeyup="validateCategory(${thing.id});"
+              onblur=""
+            />
         </div>
-        <div class="remember__table__td__subcategory">
-            ${thing.subcategory}
+        <div class="data-entry data-entry_field_subcategory">
+            <label for="subcategory-${thing.id}">
+                <span class="data-entry__label">Subcategory </span>
+                <span class="data-entry__error-msg" id="subcategory-${thing.id}-error"></span>
+            </label>
+            <input
+              class="data-entry__input"
+              id="subcategory-${thing.id}"
+              name="subcategory"
+              type="text"
+              value="${thing.subcategory}"
+              onkeyup="validateSubcategory(${thing.id});"
+              onblur=""
+            />
         </div>
-        <div class="remember__table__td__date">
-            ${thing.dateCreated}
-            ${thing.dateModified}
+        <div class="data data_field_date">
+            <span class="data_field_date-created">
+                <label for="date-created-${thing.id}">
+                    <span class="data-entry__label">Date Created </span>
+                </label>
+                <span class="data_text_date-created" id="date-created-${thing.id}">${thing.dateCreated}</span>
+            </span>
+            <span class="data_field_date-modified visually-hidden">
+                <label for="date-modified-${thing.id}">
+                    <span class="data-entry__label">Last Modified </span>
+                </label>
+                <span class="data_field_date-modified" id="date-modified-${thing.id}">${thing.dateModified}</span>
+            </span>
         </div>
-        <div class="remember__table__td__actions">
-            <span>
+
+        <div class="actions">
+            <span class="data-entry data-entry_field_status">
+                <label for="status-${thing.id}">
+                    <span class="data-entry__label">Status/Priority</span>
+                </label>
                 <select
-                  class="remember__table__td__actions__input__status"
+                  class="data-entry__input"
                   id="status-${thing.id}"
                   name="status"
                   onChange="updateRememberedThing('${thing.id}',updateStatus);" >
-                
-                    <option value="-3" disabled ${preSelect( thing.status, -3 )}>
+                    
+                    <option class="data-entry__input_status_-3" value="-3" disabled ${preSelect( thing.status, -3 )}>
                         Removed
                     </option>
-                    <option value="-2" disabled ${preSelect( thing.status, -2 )}>
+                    <option class="data-entry__input_status_-2" value="-2" disabled ${preSelect( thing.status, -2 )}>
                         Archived
                     </option>
-                    <option value="-1" ${preSelect( thing.status, -1 )}>
+                    <option class="data-entry__input_status_-1" value="-1" ${preSelect( thing.status, -1 )}>
                         Completed
                     </option>
-                    <option value="0" ${preSelect( thing.status, 0 )}>
+                    <option class="data-entry__input_status_0" value="0" ${preSelect( thing.status, 0 )}>
                         No Priority
                     </option>
-                    <option value="1" ${preSelect( thing.status, 1 )}>
+                    <option class="data-entry__input_status_1" value="1" ${preSelect( thing.status, 1 )}>
                         1 (low)
                     </option>
-                    <option value="2" ${preSelect( thing.status, 2 )}>
-                        2
+                    <option class="data-entry__input_status_2" value="2" ${preSelect( thing.status, 2 )}>
+                        2 (low-medium)
                     </option>
-                    <option value="3" ${preSelect( thing.status, 3 )}>
+                    <option class="data-entry__input_status_3" value="3" ${preSelect( thing.status, 3 )}>
                         3 (medium)
                     </option>
-                    <option value="4" ${preSelect( thing.status, 4 )}>
-                        4
+                    <option class="data-entry__input_status_4" value="4" ${preSelect( thing.status, 4 )}>
+                        4 (medium-high)
                     </option>
-                    <option value="5" ${preSelect( thing.status, 5 )}>
+                    <option class="data-entry__input_status_5" value="5" ${preSelect( thing.status, 5 )}>
                         5 (high)
                     </option>
             
                 </select>
             </span>
             
-            <span>
+            <span class="data-entry data-entry_field_favorite">
                 <label for="favorite-${thing.id}">
-                    Favorite
-
+                    <span class="data-entry__label">Favorite</span>
                     <input
-                      class="remember__table__td__actions__input__favorite"
+                      class="data-entry__input"
                       id="favorite-${thing.id}"
                       name="favorite"
                       type="checkbox"
@@ -598,25 +679,26 @@ function createTableRow( thing ) {
                 </label>
             </span>
             
-            <span>
+            <span class="data-entry data-entry_field_delete">
                 <input
+                  class="data-entry__input btn_delete"
                   id="delete-${thing.id}"
                   type="button"
                   value="Delete"
                   onclick="togglePopup('dialog-box__confirm-delete-${thing.id}');"
                 />
 
-                <div id="dialog-box__confirm-delete-${thing.id}" class="remember__table__td__actions__dialog-box hidden">
+                <div id="dialog-box__confirm-delete-${thing.id}" class="dialog-box hidden">
                     <div
-                      class="disable-screen"
+                      class="dialog-box__disable-screen"
                       onclick="togglePopup('dialog-box__confirm-delete-${thing.id}');">
-            
                     </div>
-                    <div class="dialog">
+                    <div class="dialog-box__dialog">
                         <p>
                             Please confirm.
                         </p>
                         <input
+                          class="data-entry__input btn_confirm-delete"
                           id="confirm-delete-${thing.id}"
                           type="button"
                           value="Delete"
@@ -698,6 +780,17 @@ function resetDefaultDescription() {
 
 }
 
+function flagToSave() {
+
+}
+
+function statusForClassName( status ) {
+
+    status = "data-entry__input_status_" + status;
+  
+    return status;
+
+}
 
 /**
  * 
@@ -712,7 +805,10 @@ function resetDefaultDescription() {
  */
 function clearErrors( elementID ) {
 
-    let elementValue = document.getElementById( elementID ).innerHTML = "";
+    let element = document.getElementById( elementID );
+    element.setAttribute( "aria-hidden", "true" );
+    element.innerHTML = "";
+    element.parentElement.parentElement.classList.remove( "data-entry_error" );
 
     return true;
 
@@ -741,7 +837,13 @@ function listErrors( errors ) {
         errorMsg = "<ul>";
 
         for( error of errors ) {
-            errorMsg = errorMsg + "<li>" + error + "</li>";
+
+            if( error != undefined ) {
+                
+                errorMsg = errorMsg + "<li>" + error + "</li>";
+
+            }
+
         }
 
         errorMsg = errorMsg + "</ul>";
@@ -760,9 +862,13 @@ function setErrors( elementID, errors ) {
 
     clearErrors( elementID );
     let errorList = listErrors( errors );
-    let elementValue = document.getElementById( elementID ).innerHTML = errorList;
 
-    return elementValue;
+    let element = document.getElementById( elementID );
+    element.setAttribute( "aria-hidden", "false" );
+    element.innerHTML = errorList;
+    element.parentElement.parentElement.classList.add( "data-entry_error" );
+
+    return errorList;
 
 }
 
@@ -791,34 +897,49 @@ function validateInput( elementID, callback ) {
 /**
  * 
  */
-function validateDescription() {
+function validateDescription( thingID=false ) {
     
+    let elementID  = "description";
+    
+    if( thingID !== false ) {
+        elementID += "-" + thingID;
+    }
+
+    return validateInput( elementID, checkDescriptionRules );
+
     function checkDescriptionRules( value ) {
         let errors = [];
 
         if( value === "" || value == "Enter a description or name" ) {
-            errors[0] = "Name/Description is required."
+            errors[0] = "name/description is required."
         }
 
         if( value.length < 3 ) {
-            errors[1] = `The Name/Description must be between 3 and 256 characters long.`;
+            errors[1] = `The name/description must be between 3 and 256 characters long.`;
         }
 
         if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
-            errors[2] = `The Name/Description can only contain alpha-numeric characters, dashes, spaces, and underscores.`;
+            errors[2] = `The name/description can only contain alpha-numeric characters, dashes, spaces, and underscores.`;
         }
 
         return errors;
     }
     
-    return validateInput( "description", checkDescriptionRules );
 
 }
 
 /**
  * 
  */
-function validateParentID() {
+function validateParentID( thingID=false ) {
+
+    let elementID  = "parent-id";
+    
+    if( thingID !== false ) {
+        elementID += "-" + thingID;
+    }
+
+    return validateInput( elementID, checkParentIDRules );
 
     function checkParentIDRules( value ) {
         let errors = [];
@@ -835,14 +956,20 @@ function validateParentID() {
         return errors;
     }
 
-    return validateInput( "parent-id", checkParentIDRules );
-
 }
 
 /**
  * 
  */
-function validateCategory() {
+function validateCategory( thingID=false ) {
+
+    let elementID  = "category";
+    
+    if( thingID !== false ) {
+        elementID += "-" + thingID;
+    }
+
+    return validateInput( elementID, checkCategoryRules );
 
     function checkCategoryRules( value ) {
         let errors = [];
@@ -850,7 +977,7 @@ function validateCategory() {
         if( value != "" ) {
 
             if( value.search( /^[ a-zA-Z0-9!._-]+$/ )  ) {
-                errors[0] = `The Category can only contain alphanumeric characters, dashes, spaces, and underscores.`;
+                errors[0] = `The category can only contain alphanumeric characters, dashes, spaces, and underscores.`;
             }
                 
         }
@@ -859,14 +986,20 @@ function validateCategory() {
 
     }
 
-    return validateInput( "category", checkCategoryRules );
-
 }
 
 /**
  * 
  */
-function validateSubcategory() {
+function validateSubcategory( thingID=false ) {
+
+    let elementID  = "subcategory";
+    
+    if( thingID !== false ) {
+        elementID += "-" + thingID;
+    }
+    
+    return validateInput( elementID, checkSubcategoryRules );
 
     function checkSubcategoryRules( value ) {
         let errors = [];
@@ -874,7 +1007,7 @@ function validateSubcategory() {
         if( value != "" ) {
 
             if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
-                errors[0] = `The Subcategory can only contain alphanumeric characters, dashes, spaces, and underscores.`;
+                errors[0] = `The subcategory can only contain alphanumeric characters, dashes, spaces, and underscores.`;
             }
             
         }
@@ -883,23 +1016,46 @@ function validateSubcategory() {
 
     }
 
-    return validateInput( "subcategory", checkSubcategoryRules );
+}
+
+/**
+ * 
+ */
+function validateStatus( thingID=false ) {
+
+    let elementID  = "status";
+    
+    if( thingID !== false ) {
+        elementID += "-" + thingID;
+    }
+
+    return validateInput( elementID, checkStatusRules );
+
+    function checkStatusRules( value ) {
+        let errors = [];
+        
+        if( value == "" ) {
+            errors[0] = `Status cannot be blank.`;
+        }
+        
+        return errors;
+
+    }
 
 }
 
 /**
  * 
  */
-function validateStatus() {
+function validateFavorite( thingID=false ) {
 
-    return true; // TODO
-
-}
-
-/**
- * 
- */
-function validateFavorite() {
+    let elementID  = "status";
+    
+    if( thingID !== false ) {
+        elementID += "-" + thingID;
+    }
+    
+    return validateInput( "favorite", checkFavoriteRules );
 
     function checkFavoriteRules( value ) {
         errors = [];
@@ -908,8 +1064,6 @@ function validateFavorite() {
             return true;
         }
     }
-
-    return validateInput( "favorite", checkFavoriteRules );
 
 }
 
@@ -950,6 +1104,7 @@ function exportRememberRemember() {
 
 /**
  * 
+ * source: https://codepen.io/KryptoniteDove/post/load-json-file-locally-using-pure-javascript
  */
 function importRememberRemember() {
 

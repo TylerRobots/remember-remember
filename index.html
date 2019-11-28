@@ -9,28 +9,29 @@
         <meta name="author" content="Tyler Robots">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link rel="stylesheet" type="text/css" href="./css/normalize.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
     <body>
-        <h1>Remember, remember, things I want to remember</h1>
+        <h1 class="page-title">Remember, remember, things I want to remember</h1>
         
         <section class="add">
             <h2>Add items, stories and thoughts</h2>
             <form class="add__form" action="#" target="">
-                <div class="add__form__id">
+                <div class="add__id">
                     <label for="id">
                         ID
                     </label>
-                    <input class="add__form__input__id" id="id" name="ID" type="text" value="" disabled />
+                    <input class="add__input" id="id" name="ID" type="text" value="" disabled />
                 </div>
                 
-                <div class="add__form__description">
+                <div class="add__description">
                     <label for="description">
-                        Name/Description
+                        <span class="add__label">Name/Description </span>
+                        <span class="add__error-msg" aria-hidden="true" id="description-error"></span>
                     </label>
-                    <span class="add__form__description__error" id="description-error">Name/Description is required.</span>
                     <input
-                      class="add__form__input__description"
+                      class="add__input"
                       id="description"
                       name="description"
                       type="text"
@@ -41,13 +42,13 @@
                     />
                 </div>
 
-                <div class="add__form__parent-id">
+                <div class="add__parent-id">
                     <label for="parent-id">
-                        Parent ID (optional)
+                        <span class="add__label">Parent ID (optional) </span>
+                        <span class="add__error-msg" aria-hidden="true" id="parent-id-error"></span>
                     </label>
-                    <span class="add__form__parent-id__error" id="parent-id-error"></span>
                     <input
-                      class="add__form__input__parent-id"
+                      class="add__input"
                       id="parent-id"
                       name="parentID"
                       type="text"
@@ -56,57 +57,58 @@
                     />
                 </div>
                 
-                <div class="add__form__category">
+                <div class="add__category">
                     <label for="category">
-                        Category (optional)
+                        <span class="add__label">Category (optional) </span>
+                        <span class="add__error-msg" aria-hidden="true" id="category-error"></span>
                     </label>
-                    <span class="add__form__category__error" id="category-error"></span>
                     <input
-                      class="add__form__input__category"
+                      class="add__input"
                       id="category"
                       name="category" 
                       type="text"
                       value=""
-                      onkeyup="validateCategory();" />
+                      onkeyup="validateCategory();"
+                    />
                 </div>
                 
-                <div class="add__form__subcategory">
+                <div class="add__subcategory">
                     <label for="subcategory">
-                        Subcategory (optional)
+                        <span class="add__label">Subcategory (optional) </span>
+                        <span class="add__error-msg" aria-hidden="true" id="subcategory-error"></span>
                     </label>
-                    <span class="add__form__subcategory__error" id="subcategory-error"></span>
                     <input
-                      class="add__form__input__subcategory"
+                      class="add__input"
                       id="subcategory"
                       name="subCategory" 
                       type="text"
                       value=""
-                      onkeyup="validateSubcategory();" />
+                      onkeyup="validateSubcategory();"
+                    />
                 </div>
                 
-                <div class="add__form__status">
+                <div class="add__status">
                     <label for="status">
-                        Status/Priority
+                        <span class="add__label">Status/Priority </span>
+                        <span class="add__error-msg" aria-hidden="true" id="status-error"></span>
                     </label>
-                    <span class="add__form__status__error" id="status-error"></span>
-                    <select class="add__form__input__status" id="status" name="status">
-                        <option value="0">Completed</option>
-                        <option value="0" selected>No Priority</option>
-                        <option value="1">1 (low)</option>
-                        <option value="2">2</option>
-                        <option value="3">3 (medium)</option>
-                        <option value="4">4</option>
-                        <option value="5">5 (high)</option>
+                    <select class="add__input" id="status" name="status">
+                        <option class="data-entry__input_status_-1" value="-1">Completed</option>
+                        <option class="data-entry__input_status_0" value="0" selected>No Priority</option>
+                        <option class="data-entry__input_status_1" value="1">1 (low)</option>
+                        <option class="data-entry__input_status_2" value="2">2 (low-medium)</option>
+                        <option class="data-entry__input_status_3" value="3">3 (medium)</option>
+                        <option class="data-entry__input_status_4" value="4">4 (medium-high)</option>
+                        <option class="data-entry__input_status_5" value="5">5 (high)</option>
                     </select>
                 </div>
                 
-                <div class="add__form__favorite">
+                <div class="add__favorite">
                     <label for="favorite">
-                        Favorite
-                    
-                        <span class="add__form__favorite__error" id="favorite-error"></span>
+                        <span class="add__label">Favorite </span>
+                        <span class="add__error-msg" aria-hidden="true" id="favorite-error"></span>
                         <input
-                          class="add__form__input__favorite"
+                          class="add__input"
                           id="favorite"
                           name="favorite"
                           type="checkbox"
@@ -115,9 +117,9 @@
                     </label>
                 </div>
 
-                <div class="add__form__submit">
+                <div class="add__submit">
                     <input
-                      class="add__form__input__submit"
+                      class="add__input"
                       type="button"
                       value="Add"
                       onclick="addRemember();" />
@@ -129,7 +131,7 @@
             <h2>Pick a category, filter the query</h2>
             
             <div class="categories__list">
-                <a class="categories__list_link" href="#">Category Link</a>
+                <a class="categories__link" href="#">Category Link</a>
             </div>
         </section>
         
@@ -137,17 +139,17 @@
             <h2>Things to not be forgot</h2>
 
             <div class="remember__table">
-                <div class="remember__table__th" id="table-header">
-                    <div class="remember__table__th__status">!</div>
-                    <div class="remember__table__th__id">ID</div>
-                    <div class="remember__table__th__description">Description</div>
-                    <div class="remember__table__th__category">Category</div>
-                    <div class="remember__table__th__subcategory">Subcategory</div>
-                    <div class="remember__table__th__date">
-                        Created
-                        <span class="remember__table__th__date__modified">+</span>
+                <div class="remember__th" id="table-header">
+                    <div class="remember__td remember__td_status"><span class="visually-hidden">Status/Priority</span>!</div>
+                    <div class="remember__td remember__td_description">Description</div>
+                    <div class="remember__td remember__td_id">ID</div>
+                    <div class="remember__td remember__td_category">Category</div>
+                    <div class="remember__td remember__td_subcategory">Subcategory</div>
+                    <div class="remember__td remember__td_date">
+                        <span class="remember__date_created">Date Created</span> 
+                        <span class="remember__date_modified">Date Modified</span> 
                     </div>
-                    <div class="remember__table__th__actions">Actions</div>
+                    <div class="remember__td remember__td_actions">Actions</div>
                 </div>
     
 
