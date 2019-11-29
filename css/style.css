@@ -102,7 +102,7 @@ span[aria-hidden="true"],
     grid-row: 2;
 }
 
-.add__subcategory {
+.add__tags {
     grid-column: 7 / span 4;
     grid-row: 2;
 }
@@ -179,7 +179,7 @@ span[aria-hidden="true"],
 .add__label_parent-id
 .add__label_description,
 .add__label_category,
-.add__label_subcategory,
+.add__label_tags,
 .add__label_status,
 .add__label_favorite {
     
@@ -249,7 +249,7 @@ span[aria-hidden="true"],
 .add__description,
 .add__parent-id,
 .add__category,
-.add__subcategory,
+.add__tags,
 .add__status,
 .add__submit {
     padding: 0.25em;
@@ -349,7 +349,7 @@ span[aria-hidden="true"],
 .remember__td_id,
 .remember__td_description,
 .remember__td_category,
-.remember__td_subcategory,
+.remember__td_tags,
 .remember__td_date,
 .remember__td_actions {
     padding: 0.5em 0;
@@ -377,7 +377,7 @@ span[aria-hidden="true"],
 
 .data-entry_field_description,
 .data-entry_field_category,
-.data-entry_field_subcategory {
+.data-entry_field_tags {
     text-align: left;
 }
 
@@ -465,7 +465,7 @@ span[aria-hidden="true"],
     .remember__td_status,
     .remember__td_date,
     .remember__td_category,
-    .remember__td_subcategory,
+    .remember__td_tags,
     .remember__td_actions {
         display: none;
     }
@@ -492,7 +492,7 @@ span[aria-hidden="true"],
         grid-column: 1 / span 10;
         grid-row: 3;
     }
-    .data-entry_field_subcategory {
+    .data-entry_field_tags {
         grid-column: 11 / span 10;
         grid-row: 3;
         color: rgb(127,127,127);
@@ -546,7 +546,7 @@ span[aria-hidden="true"],
     
     .remember__td_category,
     .remember__td_date,
-    .remember__td_subcategory {
+    .remember__td_tags {
         display: none;
     }
     
@@ -558,8 +558,8 @@ span[aria-hidden="true"],
     .data-entry_field_description,
     .remember__td_category,
     .data-entry_field_category,
-    .remember__td_subcategory,
-    .data-entry_field_subcategory,
+    .remember__td_tags,
+    .data-entry_field_tags,
     .remember__td_date,
     .data_field_date,
     .remember__td_actions,
@@ -583,7 +583,7 @@ span[aria-hidden="true"],
         grid-column: 2 / span 6;
         grid-row: 3;
     }
-    .data-entry_field_subcategory {
+    .data-entry_field_tags {
         grid-column: 8 / span 6;
         grid-row: 3;
     }
@@ -624,8 +624,8 @@ span[aria-hidden="true"],
     .data-entry_field_description,
     .remember__td_category,
     .data-entry_field_category,
-    .remember__td_subcategory,
-    .data-entry_field_subcategory,
+    .remember__td_tags,
+    .data-entry_field_tags,
     .remember__td_date,
     .data_field_date,
     .remember__td_actions,
@@ -648,8 +648,8 @@ span[aria-hidden="true"],
     .data-entry_field_category {
         grid-column: 11 / span 2;
     }
-    .remember__td_subcategory,
-    .data-entry_field_subcategory {
+    .remember__td_tags,
+    .data-entry_field_tags {
         grid-column: 13 / span 2;
     }
     .remember__td_date,

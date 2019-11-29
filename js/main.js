@@ -23,7 +23,7 @@ v * * saveLocalStorage( newThing )
 v * * updateRememberedThing( thingID )
 updateDescription()
 updateCategory()
-updateSubcategory()
+updateTags()
 updateStatus()
 updateFavorite()
  * Database
@@ -53,7 +53,7 @@ updateFavorite()
  * * validateDescription()
  * * validateParentID()            if( false )  // TODO
  * * validateCategory()
- * * validateSubcategory()
+ * * validateTags()
  * * validateStatus()    return true; // TODO
  * * validateFavorite()
  * * validateForm()
@@ -162,7 +162,7 @@ function compileFormToThing() {
             "description": getInput( "description" ),
             "parentID": getInput( "parent-id" ),
             "category": getInput( "category" ),
-            "subcategory": getInput( "subcategory" ),
+            "tags": getInput( "tags" ),
             "status": getInput( "status" ),
             "favorite": getInput( "favorite" ),
             "dateCreated": datetimeString(),
@@ -191,7 +191,7 @@ function getInput( elementID ) {
     }
 
     // Select options
-    if( element.tagName === "SELECT" ) {
+    if( element.tagsName === "SELECT" ) {
 
         elementValue = element.options[element.selectedIndex].value;
         return elementValue;
@@ -415,9 +415,9 @@ function updateCategory() {
 
 }
 
-function updateSubcategory() {
+function updateTags() {
 
-    rememberedThings[thingID].subcategory = getInput( "subcategory-" + thingID );
+    rememberedThings[thingID].tags = getInput( "tags-" + thingID );
 
 }
 
@@ -502,8 +502,8 @@ function filterRemoved( things ) {
 }
 
 /**
- * name, category, subcategory, dateCreated, dateModified, status
- * default, id, name, category, subcategory, [ datetimeStart, datetimeStop], status
+ * name, category, tags, dateCreated, dateModified, status
+ * default, id, name, category, tags, [ datetimeStart, datetimeStop], status
  */
 function sort() {
 
@@ -592,18 +592,18 @@ function createTableRow( thing ) {
               onblur=""
             />
         </div>
-        <div class="data-entry data-entry_field_subcategory">
-            <label for="subcategory-${thing.id}">
-                <span class="data-entry__label">Subcategory </span>
-                <span class="data-entry__error-msg" id="subcategory-${thing.id}-error"></span>
+        <div class="data-entry data-entry_field_tags">
+            <label for="tags-${thing.id}">
+                <span class="data-entry__label">Tags </span>
+                <span class="data-entry__error-msg" id="tags-${thing.id}-error"></span>
             </label>
             <input
               class="data-entry__input"
-              id="subcategory-${thing.id}"
-              name="subcategory"
+              id="tags-${thing.id}"
+              name="tags"
               type="text"
-              value="${thing.subcategory}"
-              onkeyup="validateSubcategory(${thing.id});"
+              value="${thing.tags}"
+              onkeyup="validateTags(${thing.id});"
               onblur=""
             />
         </div>
@@ -752,7 +752,7 @@ function clearDefaultDescription() {
 
     let elementID = "description";
 
-    if( getInput( elementID ) === "Enter a description or name" ){
+    if( getInput( elementID ) === "Enter a description-name" ){
 
         return setInput( elementID, "" );
 
@@ -770,11 +770,11 @@ function resetDefaultDescription() {
 
     if( getInput( elementID ) == "" ) {
 
-        errors[0] = "Name/Description is required.";
+        errors[0] = "Description/name is required.";
 
         setErrors( elementID + "-error", errors );
 
-        return setInput( elementID, "Enter a description or name" );
+        return setInput( elementID, "Enter a description-name" );
 
     }
 
@@ -910,16 +910,16 @@ function validateDescription( thingID=false ) {
     function checkDescriptionRules( value ) {
         let errors = [];
 
-        if( value === "" || value == "Enter a description or name" ) {
-            errors[0] = "name/description is required."
+        if( value === "" || value == "Enter a description-name" ) {
+            errors[0] = "Description/name is required."
         }
 
         if( value.length < 3 ) {
-            errors[1] = `The name/description must be between 3 and 256 characters long.`;
+            errors[1] = `The description/name must be between 3 and 256 characters long.`;
         }
 
         if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
-            errors[2] = `The name/description can only contain alpha-numeric characters, dashes, spaces, and underscores.`;
+            errors[2] = `The description/name can only contain alpha-numeric characters, dashes, spaces, and underscores.`;
         }
 
         return errors;
@@ -991,23 +991,23 @@ function validateCategory( thingID=false ) {
 /**
  * 
  */
-function validateSubcategory( thingID=false ) {
+function validateTags( thingID=false ) {
 
-    let elementID  = "subcategory";
+    let elementID  = "tags";
     
     if( thingID !== false ) {
         elementID += "-" + thingID;
     }
     
-    return validateInput( elementID, checkSubcategoryRules );
+    return validateInput( elementID, checkTagsRules );
 
-    function checkSubcategoryRules( value ) {
+    function checkTagsRules( value ) {
         let errors = [];
         
         if( value != "" ) {
 
             if( value.search( /^[ a-zA-Z0-9!._-]+$/ ) ) {
-                errors[0] = `The subcategory can only contain alphanumeric characters, dashes, spaces, and underscores.`;
+                errors[0] = `The tags can only contain alphanumeric characters, dashes, spaces, and underscores.`;
             }
             
         }
@@ -1075,7 +1075,7 @@ function validateForm() {
     if( validateDescription() === true &&
         validateParentID() === true &&
         validateCategory() === true &&
-        validateSubcategory() === true &&
+        validateTags() === true &&
         validateStatus() === true &&
         validateFavorite() === true
     ) {
