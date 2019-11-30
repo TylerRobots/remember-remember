@@ -1,6 +1,7 @@
 /**
  * Common Functions
  * * datetimeString( time="now" )
+ * * distinct( value, index, self )
  * * objectLength( object )
  * * togglePopup( elementID )    
  * Forms and Inputs
@@ -16,6 +17,7 @@
  * Getters
  * * getLastID()
  * * getRememberedThings()
+ * * getActiveCategories( things )
  * Setters
  * * createLocalStorage()
 v * * removeRememberedThing( thingID )
@@ -30,8 +32,10 @@ updateFavorite()
  * * saveRemoteStorage() //TODO
  * * testRemoteConnection() //TODO
  * Filters and Mappers
- * * filter()
- * * filterRemoved()
+ * * filterObj( elements, test )
+ * * isRemoved( element, index, elements )
+ * * isStatusGreaterThan( things, value )
+ * * isStatusLesserThan( things, value )
  * * sort() // TODO
  * Document Model
  * * createTableRow( thing )
@@ -92,6 +96,19 @@ function datetimeString( time="now" ) {
     
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     
+}
+
+/**
+ * 
+ * https://codeburst.io/javascript-array-distinct-5edc93501dc4
+ * @param {*} value 
+ * @param {*} index 
+ * @param {*} self 
+ */
+function distinct( value, index, self ) {
+    
+    return self.indexOf( value ) === index;
+
 }
 
 /**
@@ -331,6 +348,27 @@ function getRememberedThings() {
     
 }
 
+function getActiveCategories( things ) {
+
+    things = filterObj( things, isStatusActive );
+    return getCategories( things );
+
+}
+
+function getCategories( things ) {
+    
+    let categoryList = [];
+
+    for( thing in things ) {
+
+        categoryList[thing] = things[thing]['category'];
+
+    }
+
+    return categoryList.filter( distinct );
+
+}
+
 /**
  * 
  * 
@@ -467,38 +505,153 @@ function testRemoteConnection() {
 
 /**
  * 
- * @param {*} things 
- * @param {*} prop 
- * @param {*} value
+ * @param {*} elements 
+ * @param {*} test 
  * 
  * source: https://stackoverflow.com/a/5072145
  */
-function filter( things, prop, value ) {
-    
-    let filteredThings = {};
-    
-    for( thing in things) {
-        
-        if( things[thing][prop] != value ) {
-            
-            filteredThings[thing] = things[thing];
-            
+function filterObj( elements, test ) {
+
+    let passed = {};
+
+    for( index in elements ) {
+
+        if( test( elements[index], index, elements ) ) {
+
+            passed[index] = elements[index];
+
         }
-        
+
     }
-    
-    return filteredThings;
+
+    return passed;
+
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
+function isNotRemoved( element ) {
+
+    return !isRemoved( element );
+
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
+function isRemoved( element ) {
+
+    if( element["status"] === "-3" ) {
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
+function isStatusActive( element ) {
+
+    return isStatusGreaterThan( -1, element );
+
+}
+
+/**
+ * 
+ * @param {*} value 
+ * @param {*} element 
+ */
+function isStatusGreaterThan( value, element ) {
+
+    if( element["status"] > value ) {
+
+        return true;
+
+    }
+
+    return false;
     
 }
 
 /**
  * 
- * @param {*} things 
+ * @param {*} element 
  */
-function filterRemoved( things ) {
+function isStatusGreaterThan4( element ) {
+
+    return isStatusGreaterThan( 4, element );
+
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
+function isStatusGreaterThan3( element ) {
+
+    return isStatusGreaterThan( 3, element );
+
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
+function isStatusGreaterThan2( element ) {
+
+    return isStatusGreaterThan( 2, element );
+
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
+function isStatusGreaterThan1( element ) {
+
+    return isStatusGreaterThan( 1, element );
+
+}
+
+/**
+ * Active things
+ * @param {*} element 
+ */
+function isStatusGreaterThan0( element ) {
+
+    return isStatusGreaterThan( 0, element );
+
+}
+
+/**
+ * 
+ * @param {*} value 
+ * @param {*} element 
+ */
+function isStatusLessThan( value, element ) {
+
+    if( element["status"] < value ) {
+
+        return true;
+
+    }
+
+    return false;
     
-    return filter( things, "status", "-3" );
-    
+}
+
+/**
+ * Inactive things
+ * @param {*} element 
+ */
+function isStatusLessThan0( element ) {
+
+    return isStatusGreaterThan( 0, element );
+
 }
 
 /**
@@ -719,7 +872,7 @@ function createTableRow( thing ) {
  */
 function createTableView( things ) {
     
-    things = filterRemoved( things );
+    things = filterObj( things, isNotRemoved );
 
     for(thing in things) {
 
