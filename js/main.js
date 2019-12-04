@@ -1,7 +1,6 @@
 /**
  * Common Functions
  * * datetimeString( time="now" )
- * * distinct( value, index, self )
  * * objectLength( object )
  * * togglePopup( elementID )    
  * Forms and Inputs
@@ -20,19 +19,20 @@
  * * getActiveCategories( things )
  * Setters
  * * createLocalStorage()
-v * * removeRememberedThing( thingID )
-v * * saveLocalStorage( newThing )
-v * * updateRememberedThing( thingID )
-updateDescription()
-updateCategory()
-updateTags()
-updateStatus()
-updateFavorite()
+ v * * removeRememberedThing( thingID )
+ v * * saveLocalStorage( newThing )
+ v * * updateRememberedThing( thingID )
+ updateDescription()
+ updateCategory()
+ updateTags()
+ updateStatus()
+ updateFavorite()
  * Database
  * * saveRemoteStorage() //TODO
  * * testRemoteConnection() //TODO
  * Filters and Mappers
  * * filterObj( elements, test )
+ * * isDistinct( value, index, self )
  * * isRemoved( element, index, elements )
  * * isStatusGreaterThan( things, value )
  * * isStatusLesserThan( things, value )
@@ -77,6 +77,7 @@ createLocalStorage() ? true : createTableView( getRememberedThings() );
  * 
  */
 
+
 /**
  * datetimeString creates a SQL formatted datetime string using a defined 
  * *time* and the current *time*, `now` as the default.
@@ -96,19 +97,6 @@ function datetimeString( time="now" ) {
     
     return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
     
-}
-
-/**
- * 
- * https://codeburst.io/javascript-array-distinct-5edc93501dc4
- * @param {*} value 
- * @param {*} index 
- * @param {*} self 
- */
-function distinct( value, index, self ) {
-    
-    return self.indexOf( value ) === index;
-
 }
 
 /**
@@ -365,7 +353,7 @@ function getCategories( things ) {
 
     }
 
-    return categoryList.filter( distinct );
+    return categoryList.filter( isDistinct );
 
 }
 
@@ -530,6 +518,19 @@ function filterObj( elements, test ) {
 
 /**
  * 
+ * @param {*} value 
+ * @param {*} index 
+ * @param {*} self 
+ * https://codeburst.io/javascript-array-distinct-5edc93501dc4
+ */
+function isDistinct( value, index, self ) {
+    
+    return self.indexOf( value ) === index;
+
+}
+
+/**
+ * 
  * @param {*} element 
  */
 function isNotRemoved( element ) {
@@ -544,13 +545,7 @@ function isNotRemoved( element ) {
  */
 function isRemoved( element ) {
 
-    if( element["status"] === "-3" ) {
-
-        return true;
-
-    }
-
-    return false;
+    return element["status"] === "-3";
 
 }
 
@@ -567,18 +562,12 @@ function isStatusActive( element ) {
  */
 function isStatusGreaterThan( value, element ) {
 
-    if( element["status"] > value ) {
-
-        return true;
-
-    }
-
-    return false;
+    return element["status"] > value;
     
 }
 
 /**
- * 
+ * Status/priority 5, highest.
  * @param {*} element 
  */
 function isStatusGreaterThan4( element ) {
@@ -588,7 +577,7 @@ function isStatusGreaterThan4( element ) {
 }
 
 /**
- * 
+ * Status/priority above 4, medium-high and high.
  * @param {*} element 
  */
 function isStatusGreaterThan3( element ) {
@@ -598,7 +587,7 @@ function isStatusGreaterThan3( element ) {
 }
 
 /**
- * 
+ * Status/priority above 3, medium, medium-high and high.
  * @param {*} element 
  */
 function isStatusGreaterThan2( element ) {
@@ -608,7 +597,7 @@ function isStatusGreaterThan2( element ) {
 }
 
 /**
- * 
+ * Status/priority above 2, low-medium, medium, medium-high and high.
  * @param {*} element 
  */
 function isStatusGreaterThan1( element ) {
@@ -618,7 +607,7 @@ function isStatusGreaterThan1( element ) {
 }
 
 /**
- * Active things
+ * Status/priority above 1, all active.
  * @param {*} element 
  */
 function isStatusGreaterThan0( element ) {
@@ -634,18 +623,12 @@ function isStatusGreaterThan0( element ) {
  */
 function isStatusLessThan( value, element ) {
 
-    if( element["status"] < value ) {
+    return element["status"] < value;
 
-        return true;
-
-    }
-
-    return false;
-    
 }
 
 /**
- * Inactive things
+ * Status/priority less than 1, all inactive.
  * @param {*} element 
  */
 function isStatusLessThan0( element ) {
@@ -974,7 +957,7 @@ function clearErrors( elementID ) {
  */
 function handleErrors( elementID, errors ) {
 
-    return( errors.length > 0 ? setErrors( elementID, errors ) : clearErrors( elementID ) );
+    return( errors.length > 0 ? setErrors( elementID, errors ) : !clearErrors( elementID ) );
 
 }
 
